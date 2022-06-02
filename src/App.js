@@ -1,25 +1,33 @@
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
 
-function App() {
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import blue from '@mui/material/colors/blue';
+import Navbar from './components/Navbar';
+import Landing from './components/Landing';
+import AdminPage from './components/AdminPage';
+import VisitorPage from './components/VisitorPage';
+
+const darkTheme = createTheme({
+  palette: {
+    mode: 'light',
+    primary: blue
+  },
+});
+
+const App = () => { 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <ThemeProvider theme={darkTheme}>
+      <Router>
+        <Navbar />
+        <Routes>
+            <Route path='/' element={<Landing />} />
+            <Route path='/admin' element={<AdminPage />} />
+            <Route path='/visitor' element={<VisitorPage />} />
+        </Routes>
+      </Router>
+    </ThemeProvider>
+)};
 
 export default App;
