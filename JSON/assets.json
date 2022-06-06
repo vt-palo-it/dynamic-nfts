@@ -1,0 +1,20 @@
+[
+    {
+        "image": "Resources.png",
+        "name": "Resources_Badge",
+        "description": "**Test File 1** \n\nThis is a test asset for NFT Creation",
+        "external_url": "https://www.testasset.com"     
+    },
+    {
+        "image": "supervision.png",
+        "name": "Supervision_Badge",
+        "description": "**Test File 2** \n\nThis is a test asset for NFT Creation",
+        "external_url": "https://www.testasset.com"     
+    },
+    {
+        "image": "testing.png",
+        "name": "Testing_Badge",
+        "description": "**Test File 2** \n\nThis is a test asset for NFT Creation",
+        "external_url": "https://www.testasset.com"     
+    }
+]

@@ -1,0 +1,10 @@
+{
+    "name": "Test Collection",
+    "description": "This is a test collection",
+    "image": "test_collection.gif",
+    "external_url": "https://www.testasset.com",
+    "seller_fee_basis_points": 1000,
+    "fee_recipient": "0xE80d262a880659143Ee1fA79023820C1380245e2",
+    "contract_name": "ContractName000028",
+    "collection_token": "TCN"
+}
