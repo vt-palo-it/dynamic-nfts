@@ -4,48 +4,53 @@
     "experience": [
         {
             "name": "Experience 001",
-            "image": "experience001.jpg",
+            "image": "experience001.png",
             "description": "1-2 years of experience Bronze badge"
         },
         {
             "name": "Experience 002",
-            "image": "experience002.jpg",
+            "image": "experience002.png",
             "description": "3-4 years of experience Silver badge"
         },
         {
             "name": "Experience 003",
-            "image": "experience003.jpg",
+            "image": "experience003.png",
             "description": "5+ years of experience Gold badge"
         }
     ],
     "education": [
         {
             "name": "Education 001",
-            "image": "education001.jpg",
+            "image": "education001.png",
             "description": "Completed 1st year Course Bronze badge"
         },
         {
             "name": "Education 002",
-            "image": "education002.jpg",
+            "image": "education002.png",
             "description": "Completed 2nd year Course Silver badge"
         },
         {
             "name": "Education 003",
-            "image": "education003.jpg",
+            "image": "education003.png",
             "description": "Completed 3rd year Course Gold badge"
         }
     ],
     "achievements": [
         {
             "name": "Achievement 001",
-            "image": "achievement001.jpg",
+            "image": "achievement001.png",
             "description": "Great Performance and Project Delivery"
         }
     ],
     "certification": [
         {
+            "name": "Certification 001",
+            "image": "certification001.png",
+            "description": "Certification for completing Developer Course"
+        },
+        {
             "name": "Azure 900 Certification",
-            "image": "azure900cert.jpg",
+            "image": "azure900cert.png",
             "description": "Completed Azure 900 Certification"
         }
     ]

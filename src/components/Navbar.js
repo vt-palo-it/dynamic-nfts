@@ -25,8 +25,9 @@ const Navbar = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" color="inherit">
         <Toolbar>
-        <Button variant="contained">Request Account</Button>
+        <img src="./assets/BlocSkillz.png" alt="Logo"/>
         <Typography component="div" sx={{ flexGrow: 1 }} />
+        <Button sx={{ mr: 2 }} variant="contained">Request Account</Button>
         { address ? <Button sx={{ mr: 2 }}variant="contained">Dashboard</Button> : '' }
         <Button variant="contained" onClick={connectWithMetamask}>{walletAddress}</Button>
         </Toolbar>

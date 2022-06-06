@@ -1,4 +1,4 @@
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import TextField from '@mui/material/TextField';
@@ -17,27 +17,23 @@ const VisitorPage = () => {
     const [data,setData]=useState([]);
 
     const getData = () => {
-      fetch('users.json'
-      ,{
-        headers : { 
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-         }
-      }
-      )
+        fetch('users.json', {
+            headers : { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+            }
+        })
         .then(function(response){
-          return response.json();
+            return response.json();
         })
         .then(function(myJson) {
-          setData(myJson)
+            setData(myJson)
         });
     }
     useEffect(()=>{
       getData()
     },[])
 
-    console.log(data)
-    
     return (
         <Box p={2} width="full" alignItems="center">
             <Paper elevation={3} padding={5}>

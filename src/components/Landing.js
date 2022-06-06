@@ -25,9 +25,10 @@ const Landing = () => {
 
     return (
         <Box p={2} width="full" alignItems="center">
-            <Paper elevation={3} padding={5}>
-                <Stack direction='column' spacing={4} padding={35}>
-                    <TextField id="outlined-basic" label="Wallet Address" variant="outlined" margintop={5}/>
+            <Paper elevation={3}>
+                <Stack direction='column' spacing={5} padding={35}>
+                    <img src="./assets/BlocSkillz.png" alt="Logo" width="100%"/>
+                    <TextField id="outlined-basic" label="Wallet Address" variant="outlined" />
                     <Button variant="contained" onClick={routeChange}>Search</Button>
                 </Stack>
             </Paper>
