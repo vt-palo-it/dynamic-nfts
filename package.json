@@ -46,7 +46,7 @@
     "eject": "react-scripts eject",
     "clean": "npx hardhat clean",
     "compile": "npx hardhat compile",
-    "test:backend": "npx hardhat test",
+    "test:backend": "npx hardhat test --network localhost",
     "node": "npx hardhat node",
     "deploy:local": "npx hardhat run scripts/deploy.js --network localhost",
     "deploy:network": "npx hardhat run scripts/deploy.js --network all"
