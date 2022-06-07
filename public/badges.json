@@ -1,6 +1,18 @@
 {
     "id": "000001",
     "wallet": "0x00000000000000000000001",
+    "badgesList": [
+        "Experience 001",
+        "Experience 002",
+        "Experience 003",
+        "Education 001",
+        "Education 002",
+        "Education 003",
+        "Achievement 001",
+        "Certification 001",
+        "Azure 900 Certification"
+    ]
+    ,
     "experience": [
         {
             "name": "Experience 001",
