@@ -2,7 +2,6 @@
   "name": "my-nft-career",
   "version": "0.1.0",
   "private": true,
-  "main": "index.js",
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
@@ -25,42 +24,13 @@
     "stream-browserify": "^3.0.0",
     "styled-components": "^5.3.5",
     "web-vitals": "^2.1.4",
-    "webpack": "4.44.2",
-    "@alch/alchemy-web3": "^1.4.2",
-    "@openzeppelin/contracts": "^4.6.0",
-    "dotenv": "^16.0.1",
-    "mime": "^3.0.0",
-    "nft.storage": "^6.2.0"
-  },
-  "devDependencies": {
-    "@nomiclabs/hardhat-ethers": "^2.0.6",
-    "@nomiclabs/hardhat-waffle": "^2.0.3",
-    "@nomiclabs/hardhat-etherscan": "^3.0.3",
-    "chai": "^4.3.6",
-    "ethereum-waffle": "^3.4.4",
-    "ethers": "^5.6.8",
-    "hardhat": "^2.9.7",
-    "msw": "^0.35.0",
-    "assert": "^2.0.0",
-    "buffer": "^6.0.3",
-    "https-browserify": "^1.0.0",
-    "os-browserify": "^0.3.0",
-    "process": "^0.11.10",
-    "react-app-rewired": "^2.2.1",
-    "stream-http": "^3.2.0",
-    "url": "^0.11.0"
+    "webpack": "4.44.2"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test:frontend": "react-scripts test",
-    "eject": "react-scripts eject",
-    "clean": "npx hardhat clean",
-    "compile": "npx hardhat compile",
-    "test:backend": "npx hardhat test --network localhost",
-    "node": "npx hardhat node",
-    "deploy:local": "npx hardhat run scripts/deploy.js --network localhost",
-    "deploy:network": "npx hardhat run scripts/deploy.js --network all"
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -72,5 +42,16 @@
     ">0.2%",
     "not dead",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "assert": "^2.0.0",
+    "buffer": "^6.0.3",
+    "https-browserify": "^1.0.0",
+    "msw": "^0.35.0",
+    "os-browserify": "^0.3.0",
+    "process": "^0.11.10",
+    "react-app-rewired": "^2.2.1",
+    "stream-http": "^3.2.0",
+    "url": "^0.11.0"
+  }
 }
