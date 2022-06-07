@@ -54,7 +54,7 @@ const VisitorPage = () => {
     }
     useEffect(()=>{
       getData()
-    })
+    }, [])
 
     return (
         <Box p={2} width="full">

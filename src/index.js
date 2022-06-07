@@ -5,6 +5,8 @@ import App from './App';
 
 import { ChainId, ThirdwebProvider } from "@thirdweb-dev/react";
 
+window.Buffer = window.Buffer || require("buffer").Buffer; 
+
 const chainAPI = process.env.REACT_APP_ALCHEMY_KEY;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -17,4 +19,3 @@ root.render(
 		</ThirdwebProvider>
   </React.StrictMode>
 );
-

@@ -3,8 +3,8 @@ import styled from "styled-components";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-// import fs from 'fs';
-// import mime from 'mime';
+import { NFTStorage, File } from 'nft.storage';
+import { useAddress, useMetamask, useContract } from "@thirdweb-dev/react";
 
 import { ProfileDetails, ProfileInnerDetail } from "./AdminProfile";
 import PreviewBadge from "./PreviewBadge";
@@ -36,6 +36,8 @@ export default function MintUser({ userToMint }) {
   const [mintBadge, setMintBadge] = useState(undefined);
   const [userTitle, setUserTitle] = useState(undefined);
   const [userDescription, setUserDescription] = useState(undefined);
+  const {contract} = useContract("0x5961077c701fCB222940EF624fD45432818529eA");
+  console.log(contract)
   const getData = () => {
     fetch("badges.json", {
       headers: {
@@ -54,23 +56,30 @@ export default function MintUser({ userToMint }) {
     getData();
   }, []);
 
-  const mintNFT = () => {
+  async function mintNFT() {
     const badge = mintBadge.replace(/\s/g, '').toLowerCase().concat('.png')
     const image = `/assets/${badge}`
+  
+    console.log(contract);
+    // const imageData = await fetch(image);
+    // const imageBlob = await imageData.blob();
+    // const client = new NFTStorage({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweEE2QWVmMzNFNjA1ODRGOURDZThGQkZlQ0Q2OWUxNThCQjJkNDU5MDYiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY1NDE3NTU1MjkyNywibmFtZSI6Ik5GVEJhZGdlc0hhY2thdGhvbiJ9.sAYpf7ydVVFsWH4-KDtIH4R8_1Do6Lcem00SaW71Vh0"  })
+
     // const nft = {
     //   image: new File(
-    //     [await fs.promises.readFile(image)],
-    //     assets[i].image,
-    //     { type: mime.getType(img) }
+    //     [imageBlob],
+    //     badge,
+    //     { type: 'image/png' }
     //   ),
     //   name: userTitle,
     //   description: userDescription,
     //   attributes: [{ "type": badge.split("0")[0] }]
     // }
-    let nft = { "image": image, "name": userTitle, "description": userDescription, "attributes":[{"type": badge.split("0")[0]}] }
-    console.log(nft)
 
+   // console.log(nft)
 
+    //const metadata = await client.store(nft);
+    //console.log(metadata);
   }
 
   return (

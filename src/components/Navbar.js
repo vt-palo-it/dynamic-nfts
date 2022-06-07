@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useAddress, useMetamask } from "@thirdweb-dev/react";
+import { useAddress, useMetamask, useContract } from "@thirdweb-dev/react";
 
 import Button from '@mui/material/Button';
 import AppBar from '@mui/material/AppBar';
@@ -36,7 +36,7 @@ const Navbar = () => {
     }
     useEffect(()=>{
       getData()
-    })
+    }, [])
 
     useEffect(() => {
       if (address) {
