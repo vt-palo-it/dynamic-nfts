@@ -7,7 +7,7 @@ import "@openzeppelin/contracts/access/AccessControl.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract NFTBadges is ERC1155, AccessControl, Ownable {
+contract NFTBadgesERC1155 is ERC1155, AccessControl, Ownable {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
 

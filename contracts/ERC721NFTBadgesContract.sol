@@ -20,7 +20,7 @@ import "./standards/ERC2981PerToken.sol";
  * the owner.
  */
 
-contract NFTBadges is ERC721URIStorage, Ownable, ERC2981PerTokenRoyalties {
+contract NFTBadgesERC721 is ERC721URIStorage, Ownable, ERC2981PerTokenRoyalties {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
     uint private availableNFTs = 0;

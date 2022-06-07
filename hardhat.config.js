@@ -12,6 +12,10 @@ if (!NETWORK_API_URL.includes('polygon')) {
 module.exports = {
   solidity: '0.8.4',
   defaultNetwork: 'all',
+  paths: {
+    artifacts: './src/artifacts',
+    cache: './src/cache',
+  },
   networks: {
     hardhat: {
       chainId: 1337,
