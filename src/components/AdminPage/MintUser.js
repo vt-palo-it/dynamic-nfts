@@ -3,6 +3,8 @@ import styled from "styled-components";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
+// import fs from 'fs';
+// import mime from 'mime';
 
 import { ProfileDetails, ProfileInnerDetail } from "./AdminProfile";
 import PreviewBadge from "./PreviewBadge";
@@ -51,6 +53,25 @@ export default function MintUser({ userToMint }) {
   useEffect(() => {
     getData();
   }, []);
+
+  const mintNFT = () => {
+    const badge = mintBadge.replace(/\s/g, '').toLowerCase().concat('.png')
+    const image = `/assets/${badge}`
+    // const nft = {
+    //   image: new File(
+    //     [await fs.promises.readFile(image)],
+    //     assets[i].image,
+    //     { type: mime.getType(img) }
+    //   ),
+    //   name: userTitle,
+    //   description: userDescription,
+    //   attributes: [{ "type": badge.split("0")[0] }]
+    // }
+    let nft = { "image": image, "name": userTitle, "description": userDescription, "attributes":[{"type": badge.split("0")[0]}] }
+    console.log(nft)
+
+
+  }
 
   return (
     <MintUserWrapper>
@@ -102,7 +123,7 @@ export default function MintUser({ userToMint }) {
           userTitle={userTitle}
           userDescription={userDescription}
         />
-        <Button style={{backgroundColor:"#5463b8",margin:"2rem"}} variant="contained">Certify</Button>
+        <Button style={{backgroundColor:"#5463b8",margin:"2rem"}} variant="contained" onClick={mintNFT}>Certify</Button>
         <Button color="secondary" style={{margin:"0rem 2rem"}} variant="outlined">Discard</Button>
       </CertPreview>
       <div></div>
