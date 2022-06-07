@@ -35,7 +35,13 @@ export const Title = styled.p`
 `
 
 export default function AdminProfile() {
-  const [adminProfile,setAdminProfile] = useState({});
+  const [adminProfile,setAdminProfile] = useState({
+    name: "",
+    role: "",
+    organisation: "",
+    organisationLink: "",
+    wallet: ""
+  });
 
   const getData = () => {
     fetch('users.json'
@@ -71,8 +77,8 @@ export default function AdminProfile() {
             <p>{adminProfile?.role}</p>
           </ProfileInnerDetail>
           <ProfileInnerDetail>
-          <Title>User ID:</Title>
-            <p>{adminProfile?.id}</p>
+          <Title>User Wallet:</Title>
+            <p>{adminProfile?.wallet.substring(0, 6)}...{adminProfile?.wallet.slice(-4)}</p>
           </ProfileInnerDetail>
           <ProfileInnerDetail>
           <Title>Organisation:</Title>

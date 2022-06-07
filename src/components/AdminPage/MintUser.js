@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 import { ProfileDetails, ProfileInnerDetail } from "./AdminProfile";
+import PreviewBadge from "./PreviewBadge";
 const MintUserWrapper = styled.div`
   width: 80%;
   justify-content: space-around;
@@ -20,6 +22,7 @@ const CertDetails = styled.div`
 
 const CertPreview = styled.div`
   display: flex;
+  flex-direction: column;
 `;
 
 const H2Title = styled.h2`
@@ -53,7 +56,7 @@ export default function MintUser({ userToMint }) {
     <MintUserWrapper>
       <div></div>
       <CertDetails>
-        <H2Title>Certificatio details</H2Title>
+        <H2Title>Certification details</H2Title>
         <h4>{userToMint.name}</h4>
         <ProfileDetails>
           <ProfileInnerDetail>
@@ -61,8 +64,8 @@ export default function MintUser({ userToMint }) {
             <p>{userToMint?.role}</p>
           </ProfileInnerDetail>
           <ProfileInnerDetail>
-            <p>User ID:</p>
-            <p>{userToMint?.id}</p>
+            <p>User Wallet:</p>
+            <p>{userToMint?.wallet.substring(0,6)}...{userToMint?.wallet.slice(-4)}</p>
           </ProfileInnerDetail>
           <Autocomplete
             style={{ width: "100%", paddingTop: "1rem" }}
@@ -71,7 +74,7 @@ export default function MintUser({ userToMint }) {
               setMintBadge(newValue);
             }}
             id="combo-box-demo"
-            options={badges?.experience.map((option) => option.name)}
+            options={badges?.badgesList.map((option) => option)}
             sx={{ width: 300 }}
             renderInput={(params) => <TextField {...params} label="Badges" />}
           />
@@ -82,8 +85,6 @@ export default function MintUser({ userToMint }) {
             label="Title"
             variant="outlined"
           />
-          {userTitle}
-
           <TextField
             placeholder="Description"
             style={{ width: "100%", marginTop: "3rem" }}
@@ -95,6 +96,14 @@ export default function MintUser({ userToMint }) {
       </CertDetails>
       <CertPreview>
         <h3>Preview</h3>
+        <PreviewBadge
+          userToMintName={userToMint.name}
+          mintBadge={mintBadge}
+          userTitle={userTitle}
+          userDescription={userDescription}
+        />
+        <Button style={{backgroundColor:"#5463b8",margin:"2rem"}} variant="contained">Certify</Button>
+        <Button color="secondary" style={{margin:"0rem 2rem"}} variant="outlined">Discard</Button>
       </CertPreview>
       <div></div>
     </MintUserWrapper>
