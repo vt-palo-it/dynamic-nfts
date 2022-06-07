@@ -1,8 +1,6 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
-import { ThirdwebSDK } from "@thirdweb-dev/sdk";
-import { ethers } from "ethers"
-
+import { useSelector } from 'react-redux';
 
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -16,6 +14,10 @@ import Grid from '@mui/material/Grid';
 
 import { styled } from '@mui/material/styles';
 
+import {
+    getContract,
+} from '../../features/contractSlice';
+
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,
@@ -24,27 +26,23 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.secondary,
   }));
 
-const VisitorPage = () => {
+export default function VisitorPage()  {
     const [data,setData]=useState([]);
     const [badges,setBadges]=useState([]);
     const [value, setValue] = React.useState('1');
-
     const { wallet } = useParams();
+    const contract = useSelector(getContract);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
-    const testGetNFTS = async () =>  {
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const signer = provider.getSigner();
-        const sdk = new ThirdwebSDK(provider);
-        sdk.updateSignerOrProvider(signer);
-        const nftCollection = sdk.getNFTCollection(process.env.REACT_APP_CONTRACT_ADDRESS);
-        console.log(nftCollection);
-        const nfts = await nftCollection.getAll();
-        console.log(nfts);
+    async function testGetNFTS () {
+        if(contract !== null) {
+            console.log(contract.nft);
+            // const nft = await contract.nft.query.all();
+            // console.log(nft)
+        }
     }
     
     const getData = () => {
@@ -68,8 +66,11 @@ const VisitorPage = () => {
     }
     useEffect(()=>{
         getData()
-        testGetNFTS()
     }, [])
+
+    useEffect(()=>{
+        testGetNFTS()
+    }, [contract])
 
     return (
         <Box p={2} width="full">
@@ -184,4 +185,3 @@ const VisitorPage = () => {
         </Box>     
     )
 }
-export default VisitorPage;
