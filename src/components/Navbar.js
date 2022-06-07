@@ -7,10 +7,14 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-  
+// import { useAddress, useDisconnect, useMetamask } from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
+
 const Navbar = () => {
     const connectWithMetamask = useMetamask();
     const address = useAddress();
+    const navigate = useNavigate();
+
     const [walletAddress, setWalletAddress] = useState("Connect Wallet");
 
     const [data,setData]=useState([]);
@@ -57,7 +61,7 @@ const Navbar = () => {
           </Link>
         <Typography component="div" sx={{ flexGrow: 1 }} />
         <Button sx={{ mr: 2 }} variant="contained">Request Account</Button>
-        { admin ? <Button sx={{ mr: 2 }}variant="contained">Dashboard</Button> : '' }
+        { admin ? <Button onClick={()=>navigate("/admin")} sx={{ mr: 2 }} variant="contained">Dashboard</Button> : '' }
         <Button variant="contained" onClick={connectWithMetamask}>{walletAddress}</Button>
         </Toolbar>
       </AppBar>
