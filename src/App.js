@@ -1,12 +1,13 @@
-import blue from '@mui/material/colors/blue';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import React from 'react';
 import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
-import AdminPage from './components/AdminPage/';
-import Landing from './components/Landing';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import blue from '@mui/material/colors/blue';
+
 import Navbar from './components/Navbar';
-import VisitorPage from './components/VisitorPage';
+import Landing from './components/Landing';
+import AdminPage from './components/AdminPage/';
+import VisitorPage from './components/VisitorPage/';
 
 import './App.css';
 

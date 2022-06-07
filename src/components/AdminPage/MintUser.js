@@ -1,18 +1,23 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from 'react-redux';
+
 import styled from "styled-components";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import { NFTStorage, File } from 'nft.storage';
-import { ethers } from "ethers";
-import { useAddress, useMetamask, useContract, useContractAbi, useSigner } from "@thirdweb-dev/react";
-import { ThirdwebSDK } from "@thirdweb-dev/sdk";
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 
-import contractABI from '../../artifacts/contracts/ERC721NFTBadgesContract.sol/NFTBadgesERC721.json'
+
+import { NFTStorage, File } from 'nft.storage';
 
 import { ProfileDetails, ProfileInnerDetail } from "./AdminProfile";
 import PreviewBadge from "./PreviewBadge";
-import { SubjectRounded } from "@mui/icons-material";
+
+import {
+  getContract,
+} from '../../features/contractSlice';
+
 const MintUserWrapper = styled.div`
   width: 80%;
   justify-content: space-around;
@@ -41,6 +46,10 @@ export default function MintUser({ userToMint }) {
   const [mintBadge, setMintBadge] = useState(undefined);
   const [userTitle, setUserTitle] = useState(undefined);
   const [userDescription, setUserDescription] = useState(undefined);
+  const [loading, setLoading] = useState(false);
+  const contract = useSelector(getContract);
+  
+
   const getData = () => {
     fetch("badges.json", {
       headers: {
@@ -55,61 +64,45 @@ export default function MintUser({ userToMint }) {
         setBadges(myJson);
       });
   };
+
+  const uploadMetaData = async () => {
+    setLoading(true)
+    const nftStorageAPIKey = process.env.REACT_APP_NFT_STORAGE_API_KEY;
+    const badge = mintBadge.replace(/\s/g, '').toLowerCase().concat('.png')
+    const image = `/assets/${badge}`
+    const imageData = await fetch(image);
+    const imageBlob = await imageData.blob();
+
+    const client = new NFTStorage({ token: nftStorageAPIKey });
+
+    const nft = {
+      image: new File(
+        [imageBlob],
+        badge,
+        { type: 'image/png' }
+      ),
+      name: userTitle,
+      description: userDescription,
+      attributes: [{  "trait_type": "Type", "value": badge.split("0")[0] }]
+    }
+
+    const metadata = await client.store(nft);
+    console.log(metadata);
+
+    return metadata.url;
+  }
+
   useEffect(() => {
-    initContract();
     getData();
   }, []);
 
   async function mintNFT() {
-    // const [account] = await provider.listAccounts();
-    // console.log(account)
-    // const badge = mintBadge.replace(/\s/g, '').toLowerCase().concat('.png')
-    // const image = `/assets/${badge}`
-  
-    // const imageData = await fetch(image);
-    // const imageBlob = await imageData.blob();
-    // const client = new NFTStorage({ token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkaWQ6ZXRocjoweEE2QWVmMzNFNjA1ODRGOURDZThGQkZlQ0Q2OWUxNThCQjJkNDU5MDYiLCJpc3MiOiJuZnQtc3RvcmFnZSIsImlhdCI6MTY1NDE3NTU1MjkyNywibmFtZSI6Ik5GVEJhZGdlc0hhY2thdGhvbiJ9.sAYpf7ydVVFsWH4-KDtIH4R8_1Do6Lcem00SaW71Vh0"  })
-
-    // const nft = {
-    //   image: new File(
-    //     [imageBlob],
-    //     badge,
-    //     { type: 'image/png' }
-    //   ),
-    //   name: userTitle,
-    //   description: userDescription,
-    //   attributes: [{ "type": badge.split("0")[0] }]
-    // }
-
-
-    //const metadata = await client.store(nft);
-
-
-   // contract.contractWrapper.writeContract.safeMint('0x8Dca8Ce9c271079B64F4367d5A906c4B0CfDbC52', metadata.url, 0, 0);
-    //await contract.mintTo(account, "");
-   //const tx = await contract.call("safeMint", '0x8Dca8Ce9c271079B64F4367d5A906c4B0CfDbC52','', "0xE80d262a880659143Ee1fA79023820C1380245e2", 0);
-   //const result = await contract.call("owner");
-
-  // console.log(result);
-   //console.log(tx);
-  }
-
-  async function initContract() {
-    const [account] = await window.ethereum.request({ method: 'eth_requestAccounts' });
-    console.log(account);
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const signer = provider.getSigner();
-    const sdk = new ThirdwebSDK(provider);
-    sdk.updateSignerOrProvider(signer)
-
-    console.log(provider.getSigner())
-
-    const contract = sdk.getContractFromAbi('0xC1245D4952544f0578EA69E5b9656863CA9F790f', contractABI.abi);
-    // contract.call("safeMint", '0x8Dca8Ce9c271079B64F4367d5A906c4B0CfDbC52','', "0xE80d262a880659143Ee1fA79023820C1380245e2", 0).then((res) => {
-    //   console.log(res)
-    // }).catch((e) => {
-    //   console.log(e)
-    // })
+    const metadata = await uploadMetaData();
+    const mintToWallet = process.env.REACT_APP_MINT_TO_WALLET;
+    console.log('start minting');
+    const result = await contract.call("safeMint", mintToWallet, metadata, mintToWallet, 0);
+    console.log(result);
+    setLoading(false)
   }
 
   return (
@@ -162,8 +155,19 @@ export default function MintUser({ userToMint }) {
           userTitle={userTitle}
           userDescription={userDescription}
         />
-        <Button style={{backgroundColor:"#5463b8",margin:"2rem"}} variant="contained" onClick={mintNFT}>Certify</Button>
-        <Button color="secondary" style={{margin:"0rem 2rem"}} variant="outlined">Discard</Button>
+        {!loading && (
+          <div>
+            <Button style={{backgroundColor:"#5463b8",margin:"2rem"}} variant="contained" onClick={mintNFT}>Certify</Button>
+            <Button color="secondary" style={{margin:"0rem 2rem"}} variant="outlined">Discard</Button>
+          </div>
+        )}
+
+        {loading && (
+          <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
+            <CircularProgress />
+          </Box>
+        )}
+
       </CertPreview>
       <div></div>
     </MintUserWrapper>

@@ -1,22 +1,29 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { useAddress, useMetamask, useContract } from "@thirdweb-dev/react";
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { useAddress, useMetamask } from "@thirdweb-dev/react";
 
 import Button from '@mui/material/Button';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-// import { useAddress, useDisconnect, useMetamask } from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
+
+import {
+  initContractAsync,
+  getContract,
+} from '../features/contractSlice';
 
 const Navbar = () => {
     const connectWithMetamask = useMetamask();
     const address = useAddress();
     const navigate = useNavigate();
+    
+    const dispatch = useDispatch();
+    const contract = useSelector(getContract);
 
     const [walletAddress, setWalletAddress] = useState("Connect Wallet");
-
     const [data,setData]=useState([]);
     const [admin,setAdmin]=useState(false);
 
@@ -34,13 +41,21 @@ const Navbar = () => {
             setData(myJson)
         });
     }
+
+    const initContract = () => {
+      if(contract === null) {
+        dispatch(initContractAsync())
+      }
+    }
+    
     useEffect(()=>{
       getData()
     }, [])
 
     useEffect(() => {
       if (address) {
-          setWalletAddress(`${address.substring(0, 6)}...${address.slice(-4)}`)
+          setWalletAddress(`${address.substring(0, 6)}...${address.slice(-4)}`);
+          initContract();
           for (let i = 0; i < data.length; i++) {
             if (data[i].admin === true && data[i].wallet === address) {
               setAdmin(true);

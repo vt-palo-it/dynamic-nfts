@@ -1,5 +1,7 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
+import { ThirdwebSDK } from "@thirdweb-dev/sdk";
+import { ethers } from "ethers"
 
 
 import Box from '@mui/material/Box';
@@ -32,6 +34,18 @@ const VisitorPage = () => {
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
+
+    const testGetNFTS = async () =>  {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        const signer = provider.getSigner();
+        const sdk = new ThirdwebSDK(provider);
+        sdk.updateSignerOrProvider(signer);
+        const nftCollection = sdk.getNFTCollection(process.env.REACT_APP_CONTRACT_ADDRESS);
+        console.log(nftCollection);
+        const nfts = await nftCollection.getAll();
+        console.log(nfts);
+    }
     
     const getData = () => {
         fetch('/users.json', {
@@ -53,7 +67,8 @@ const VisitorPage = () => {
         });
     }
     useEffect(()=>{
-      getData()
+        getData()
+        testGetNFTS()
     }, [])
 
     return (
@@ -166,7 +181,7 @@ const VisitorPage = () => {
                 </Fragment>
                 </Stack>
             </Paper>
-      </Box>     
+        </Box>     
     )
 }
 export default VisitorPage;
