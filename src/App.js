@@ -28,7 +28,7 @@ const App = () => {
         <Routes>
             <Route path='/' element={<Landing />} />
             <Route path='/admin' element={<AdminPage />} />
-            <Route path='/visitor' element={<VisitorPage />} />
+            <Route path='/visitor/:wallet' element={<VisitorPage />} />
         </Routes>
       </Router>
     </ThemeProvider>

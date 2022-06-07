@@ -2,7 +2,7 @@
     {
         "id": "00001",
         "name": "John Doe",
-        "wallet": "0x00000000000000000000001",
+        "wallet": "0xE80d262a880659143Ee1fA79023820C1380245e2",
         "employer": "",
         "role": "CEO",
         "tag": "",
@@ -15,34 +15,40 @@
     {
         "id": "00002",
         "name": "Billy Bob",
-        "wallet": "0x00000000000000000000002",
-        "employer": "0x00000000000000000000001",
+        "wallet": "0x3350C6332eA76700FF1fCe2963589E350325C211",
+        "employer": "0xE80d262a880659143Ee1fA79023820C1380245e2",
         "role": "Developer",
         "tag": "JS | Python | React | C#",
         "profile": "Leveraging more than 20 years of enterprise architecture leadership experience, I create cutting-edge technical solutions, features, and experiences that delight customers. In addition, I lead world-class software engineers that design large distributed systems in an Agile development environment with object-oriented systems.\nFurthermore, I lead the development of new and existing processes to improve workforce productivity and performance.\n\nAs a creative, out-of-the-box thinker, I work closely with product managers, scrum teams, engineers, and engineering leadership to architect, develop, and deliver the best technical designs for reliability, scalability, and sustainability. In addition, I build and lead world-class software engineers (both onshore and offshore) that design and deliver large distributed systems in an agile development environment with object-oriented systems.\n\nI'm passionate about technology, innovative, problem solver, and a deep thinker with no ego. I always have something new or surprise to improve a system.\nEnjoy tackling new problems with existing frameworks and methodologies but also keeping and eye out on emerging ones to make this job easier.",
         "admin": false,
         "badges": [
             {
-            "type": "Experience",
             "metadata": {
                     "name": "2 Years Experience",
                     "description": "2 years experience working with Node.js and Flutter designing Web Apps and Mobile Apps for Finance and eCommerce clients",
-                    "image": "experience001.jpg",
+                    "image": "experience001.png",
                     "attributes": {
-                        "performance": "2/5",
-                        "knowledge": "4/5"
+                        "type": "experience"
                     }
                 }
             },
             {
-            "type": "Education",
+                "metadata": {
+                        "name": "5 Years Experience",
+                        "description": "5 years experience working with Node.js and Flutter designing Web Apps and Mobile Apps for Finance and eCommerce clients",
+                        "image": "experience002.png",
+                        "attributes": {
+                            "type": "experience"
+                        }
+                    }
+                },
+            {
             "metadata": {
                     "name": "Programming 101",
                     "description": "Distinction in Programming with Javascript",
-                    "image": "education001.jpg",
+                    "image": "education001.png",
                     "attributes": {
-                        "assignments": "5/5",
-                        "exam": "4/5"
+                        "type": "education"
                     }
                 }
             }
