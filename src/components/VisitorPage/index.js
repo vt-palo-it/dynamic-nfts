@@ -1,6 +1,5 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
@@ -14,9 +13,6 @@ import Grid from '@mui/material/Grid';
 
 import { styled } from '@mui/material/styles';
 
-import {
-    getContract,
-} from '../../features/contractSlice';
 
 const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -31,18 +27,17 @@ export default function VisitorPage()  {
     const [badges,setBadges]=useState([]);
     const [value, setValue] = React.useState('1');
     const { wallet } = useParams();
-    const contract = useSelector(getContract);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
     async function testGetNFTS () {
-        if(contract !== null) {
-            console.log(contract.nft);
-            // const nft = await contract.nft.query.all();
-            // console.log(nft)
-        }
+        const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
+        const result = await fetch(`https://testnets-api.opensea.io/api/v1/assets?offset=0&limit=20&asset_contract_address=${contractAddress}`)
+        const data = await result.json();
+
+        console.log(data)
     }
     
     const getData = () => {
@@ -66,11 +61,9 @@ export default function VisitorPage()  {
     }
     useEffect(()=>{
         getData()
+        testGetNFTS()
     }, [])
 
-    useEffect(()=>{
-        testGetNFTS()
-    }, [contract])
 
     return (
         <Box p={2} width="full">
