@@ -47,6 +47,7 @@ export default function MintUser({ userToMint }) {
   const [userTitle, setUserTitle] = useState(undefined);
   const [userDescription, setUserDescription] = useState(undefined);
   const [loading, setLoading] = useState(false);
+  const [mintedTransaction, setMintedTransaction] = useState(false);
   const contract = useSelector(getContract);
   
 
@@ -67,6 +68,7 @@ export default function MintUser({ userToMint }) {
 
   const uploadMetaData = async () => {
     setLoading(true)
+    setMintedTransaction(false)
     const nftStorageAPIKey = process.env.REACT_APP_NFT_STORAGE_API_KEY;
     const badge = mintBadge.replace(/\s/g, '').toLowerCase().concat('.png')
     const image = `/assets/${badge}`
@@ -102,8 +104,12 @@ export default function MintUser({ userToMint }) {
     console.log('start minting');
     const result = await contract.call("safeMint", mintToWallet, metadata, mintToWallet, 0);
     console.log(result);
-    setLoading(false)
+    setLoading(false);
+    console.log(result.receipt.transactionHash);
+    setMintedTransaction(result.receipt.transactionHash);
+    console.log(mintedTransaction);
   }
+
 
   return (
     <MintUserWrapper>
@@ -166,6 +172,12 @@ export default function MintUser({ userToMint }) {
           <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
             <CircularProgress />
           </Box>
+        )}
+
+        {mintedTransaction && (
+          <Button style={{backgroundColor:"#5463b8", margin:"2rem 2rem 1rem", textAlign: "center"}} variant="contained" href={`https://rinkeby.etherscan.io/tx/${mintedTransaction}`} target="_blank">
+            See on Etherscan
+          </Button>
         )}
 
       </CertPreview>
