@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from 'react-redux';
+
 import styled from "styled-components";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-// import fs from 'fs';
-// import mime from 'mime';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
+
+
+import { NFTStorage, File } from 'nft.storage';
 
 import { ProfileDetails, ProfileInnerDetail } from "./AdminProfile";
 import PreviewBadge from "./PreviewBadge";
+
+import {
+  getContract,
+} from '../../features/contractSlice';
+
 const MintUserWrapper = styled.div`
   width: 80%;
   justify-content: space-around;
@@ -36,6 +46,10 @@ export default function MintUser({ userToMint }) {
   const [mintBadge, setMintBadge] = useState(undefined);
   const [userTitle, setUserTitle] = useState(undefined);
   const [userDescription, setUserDescription] = useState(undefined);
+  const [loading, setLoading] = useState(false);
+  const contract = useSelector(getContract);
+  
+
   const getData = () => {
     fetch("badges.json", {
       headers: {
@@ -50,27 +64,45 @@ export default function MintUser({ userToMint }) {
         setBadges(myJson);
       });
   };
+
+  const uploadMetaData = async () => {
+    setLoading(true)
+    const nftStorageAPIKey = process.env.REACT_APP_NFT_STORAGE_API_KEY;
+    const badge = mintBadge.replace(/\s/g, '').toLowerCase().concat('.png')
+    const image = `/assets/${badge}`
+    const imageData = await fetch(image);
+    const imageBlob = await imageData.blob();
+
+    const client = new NFTStorage({ token: nftStorageAPIKey });
+
+    const nft = {
+      image: new File(
+        [imageBlob],
+        badge,
+        { type: 'image/png' }
+      ),
+      name: userTitle,
+      description: userDescription,
+      attributes: [{  "trait_type": "Type", "value": badge.split("0")[0] }]
+    }
+
+    const metadata = await client.store(nft);
+    console.log(metadata);
+
+    return metadata.url;
+  }
+
   useEffect(() => {
     getData();
   }, []);
 
-  const mintNFT = () => {
-    const badge = mintBadge.replace(/\s/g, '').toLowerCase().concat('.png')
-    const image = `/assets/${badge}`
-    // const nft = {
-    //   image: new File(
-    //     [await fs.promises.readFile(image)],
-    //     assets[i].image,
-    //     { type: mime.getType(img) }
-    //   ),
-    //   name: userTitle,
-    //   description: userDescription,
-    //   attributes: [{ "type": badge.split("0")[0] }]
-    // }
-    let nft = { "image": image, "name": userTitle, "description": userDescription, "attributes":[{"type": badge.split("0")[0]}] }
-    console.log(nft)
-
-
+  async function mintNFT() {
+    const metadata = await uploadMetaData();
+    const mintToWallet = process.env.REACT_APP_MINT_TO_WALLET;
+    console.log('start minting');
+    const result = await contract.call("safeMint", mintToWallet, metadata, mintToWallet, 0);
+    console.log(result);
+    setLoading(false)
   }
 
   return (
@@ -123,8 +155,19 @@ export default function MintUser({ userToMint }) {
           userTitle={userTitle}
           userDescription={userDescription}
         />
-        <Button style={{backgroundColor:"#5463b8",margin:"2rem"}} variant="contained" onClick={mintNFT}>Certify</Button>
-        <Button color="secondary" style={{margin:"0rem 2rem"}} variant="outlined">Discard</Button>
+        {!loading && (
+          <div>
+            <Button style={{backgroundColor:"#5463b8",margin:"2rem"}} variant="contained" onClick={mintNFT}>Certify</Button>
+            <Button color="secondary" style={{margin:"0rem 2rem"}} variant="outlined">Discard</Button>
+          </div>
+        )}
+
+        {loading && (
+          <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: '2rem' }}>
+            <CircularProgress />
+          </Box>
+        )}
+
       </CertPreview>
       <div></div>
     </MintUserWrapper>

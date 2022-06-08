@@ -9,7 +9,9 @@ module.exports = function override(config) {
         "http": require.resolve("stream-http"),
         "https": require.resolve("https-browserify"),
         "os": require.resolve("os-browserify"),
-        "url": require.resolve("url")
+        "url": require.resolve("url"),
+        "fs": false,
+        "mime": false
     })
     config.ignoreWarnings = [/Failed to parse source map/];
     config.resolve.fallback = fallback;
