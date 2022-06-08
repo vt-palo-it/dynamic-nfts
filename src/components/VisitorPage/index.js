@@ -24,45 +24,44 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function VisitorPage()  {
     const [data,setData]=useState([]);
-    const [badges,setBadges]=useState([]);
-    const [value, setValue] = React.useState('1');
+    const [value, setValue] = useState('1');
+    const [nfts, setNFTs] = useState([]);
     const { wallet } = useParams();
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
+
     async function testGetNFTS () {
         const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS;
         const result = await fetch(`https://testnets-api.opensea.io/api/v1/assets?offset=0&limit=20&asset_contract_address=${contractAddress}`)
-        const data = await result.json();
-
-        console.log(data)
+        const nft_array = await result.json();
+        setNFTs(nft_array.assets)
     }
     
-    const getData = () => {
-        fetch('/users.json', {
-            headers : { 
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-            }
-        })
-        .then(function(response){
-            return response.json();
-        })
-        .then(function(myJson) {
-            for (let i = 0; i < myJson.length; i++) {
-                if (myJson[i].wallet === wallet) {
-                    setData(myJson[i]);
-                    setBadges(myJson[i].badges)
-                }
-            }
-        });
-    }
     useEffect(()=>{
+        const getData = () => {
+            fetch('/users.json', {
+                headers : { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+                }
+            })
+            .then(function(response){
+                return response.json();
+            })
+            .then(function(myJson) {
+                for (let i = 0; i < myJson.length; i++) {
+                    if (myJson[i].wallet.toLowerCase() === wallet.toLowerCase()) {
+                        setData(myJson[i]);
+                    }
+                }
+            });
+        }
         getData()
         testGetNFTS()
-    }, [])
+    }, [data, wallet])
 
 
     return (
@@ -91,83 +90,82 @@ export default function VisitorPage()  {
                             </Box>
                             <TabPanel value="1">
                                 <Grid container spacing={2}>
-                                    {badges.map((item, key) => {
-                                    if (item.metadata.attributes.type === 'experience') {
-                                        let image = `/assets/${item.metadata.image}`
+                                    {nfts.length > 0 ? (nfts.map((item, key) => {
+                                    if (item.traits[0].value === 'experience' && item.owner.address === data.wallet.toLowerCase()) {
+                                        let image = item.image_original_url
                                         return (
-                                        <Grid item xs={3} p={1}>
-                                            <Item sx={{ width: '100%', typography: 'body2' }} paddingTop={2}>
+                                        <Grid item xs={3} p={1} key={key}>
+                                            <Item sx={{ width: '100%', typography: 'body2' }}>
                                                 <img src={image} alt="Logo"/><br/>
-                                                {item.metadata.name}<br/>
-                                                {item.metadata.description}
+                                                {item.name}<br/>
+                                                {item.description}
                                             </Item>
                                         </Grid>
                                         )
                                     } else {
                                         return null
                                     }
-                                })}
+                                })) : ''}
                                 </Grid>
                             </TabPanel>
                             <TabPanel value="2">
                                 <Grid container spacing={2}>
-                                    {badges.map((item, key) => {
-                                    if (item.metadata.attributes.type === 'education') {
-                                        let image = `/assets/${item.metadata.image}`
+                                    {nfts.length > 0 ? (nfts.map((item, key) => {
+                                    if (item.traits[0].value === 'education' && item.owner.address === data.wallet.toLowerCase()) {
+                                        let image = item.image_original_url
                                         return (
-                                        <Grid item xs={3} p={1}>
-                                        <Item sx={{ width: '100%', typography: 'body2' }} paddingTop={2}>
-                                            <img src={image} alt="Logo"/><br/>
-                                            {item.metadata.name}<br/>
-                                            {item.metadata.description}
-                                        </Item>
+                                        <Grid item xs={3} p={1} key={key}>
+                                            <Item sx={{ width: '100%', typography: 'body2' }}>
+                                                <img src={image} alt="Logo"/><br/>
+                                                {item.name}<br/>
+                                                {item.description}
+                                            </Item>
                                         </Grid>
                                         )
                                     } else {
                                         return null
                                     }
-                                })}
+                                })) : ''}
                                 </Grid>
                             </TabPanel>
                             <TabPanel value="3">
                                 <Grid container spacing={2}>
-                                    {badges.map((item, key) => {
-                                    if (item.metadata.attributes.type === 'acievements') {
-                                        let image = `/assets/${item.metadata.image}`
+                                    {nfts.length > 0 ? (nfts.map((item, key) => {
+                                    if (item.traits[0].value === 'achievement' && item.owner.address === data.wallet.toLowerCase()) {
+                                        let image = item.image_original_url
                                         return (
-                                            <Grid item xs={3} p={1}>
-                                                <Item sx={{ width: '100%', typography: 'body2' }} paddingTop={2}>
-                                                    <img src={image} alt="Logo"/><br/>
-                                                    {item.metadata.name}<br/>
-                                                    {item.metadata.description}
-                                                </Item>
-                                            </Grid>
-                                        )
-                                    } else {
-                                        return null
-                                    }
-                                })}
-                                </Grid>
-                            </TabPanel>
-                            <TabPanel value="4">
-                                <Grid container spacing={2}>
-                                    {badges.map((item, key) => {
-                                
-                                    if (item.metadata.attributes.type === 'certification') {
-                                        let image = `/assets/${item.metadata.image}`
-                                        return (
-                                        <Grid item xs={3} p={1}>
-                                            <Box sx={{ width: '100%', typography: 'body2' }} paddingTop={2}>
+                                        <Grid item xs={3} p={1} key={key}>
+                                            <Item sx={{ width: '100%', typography: 'body2' }}>
                                                 <img src={image} alt="Logo"/><br/>
-                                                {item.metadata.name}<br/>
-                                                {item.metadata.description}
-                                            </Box>
+                                                {item.name}<br/>
+                                                {item.description}
+                                            </Item>
                                         </Grid>
                                         )
                                     } else {
                                         return null
                                     }
-                                })}
+                                })) : ''}
+                                </Grid>
+                            </TabPanel>
+                            <TabPanel value="4">
+                                <Grid container spacing={2}>
+                                    {nfts.length > 0 ? (nfts.map((item, key) => {
+                                    if (item.traits[0].value === 'certification' && item.owner.address === data.wallet.toLowerCase()) {
+                                        let image = item.image_original_url
+                                        return (
+                                        <Grid item xs={3} p={1} key={key}>
+                                            <Item sx={{ width: '100%', typography: 'body2' }}>
+                                                <img src={image} alt="Logo"/><br/>
+                                                {item.name}<br/>
+                                                {item.description}
+                                            </Item>
+                                        </Grid>
+                                        )
+                                    } else {
+                                        return null
+                                    }
+                                })) : ''}   
                                 </Grid>
                             </TabPanel>
                         </TabContext>

@@ -10,7 +10,7 @@ if (!NETWORK_API_URL.includes('polygon')) {
 }
 
 module.exports = {
-  solidity: '0.8.4',
+  solidity: '0.8.6',
   defaultNetwork: 'all',
   paths: {
     artifacts: './src/artifacts',

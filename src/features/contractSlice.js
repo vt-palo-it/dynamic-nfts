@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { ethers } from "ethers"
 import { ThirdwebSDK } from "@thirdweb-dev/sdk";
-import contractABI from '../artifacts/contracts/ERC721NFTBadgesContract.sol/NFTBadgesERC721.json'
+import contractABI from '../artifacts/contracts/BlocSkillzNFT001.sol/BlocSkillzNFT001.json'
 
 
 const initialState= {

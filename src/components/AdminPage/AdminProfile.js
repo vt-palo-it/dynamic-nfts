@@ -1,6 +1,9 @@
 import EditIcon from '@mui/icons-material/Edit';
 import React,{ useEffect, useState } from "react";
 import styled from "styled-components";
+import Box from '@mui/material/Box';
+import Paper from '@mui/material/Paper';
+import Stack from '@mui/material/Stack';
 
 const AdminProfileInner = styled.div`
   @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
@@ -14,7 +17,7 @@ const AdminProfileInner = styled.div`
 
 const ProfileImg = styled.img`
   height: 200px;
-  width: 200px;
+  width: 150px;
 `;
 
 export const ProfileDetails = styled.div`
@@ -64,9 +67,12 @@ export default function AdminProfile() {
   },[])
 
   return (
+    <Box p={2} width="full">
+            <Paper elevation={3}>
+                <Stack direction='column' spacing={1} paddingLeft={5} paddingRight={5} paddingBottom={5}>
       <AdminProfileInner>
         <div></div>
-        <ProfileImg />
+        <ProfileImg src={"/assets/avatar.jpg"}/>
         <ProfileDetails>
           <ProfileInnerDetail>
             <h3>{adminProfile?.name}</h3>
@@ -88,5 +94,8 @@ export default function AdminProfile() {
         <div></div>
 
       </AdminProfileInner>
+      </Stack>
+            </Paper>
+        </Box>     
   );
 }

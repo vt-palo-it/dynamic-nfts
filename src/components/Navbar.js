@@ -42,17 +42,20 @@ const Navbar = () => {
         });
     }
 
-    const initContract = () => {
-      if(contract === null) {
-        dispatch(initContractAsync())
-      }
-    }
+    
     
     useEffect(()=>{
       getData()
     }, [])
 
     useEffect(() => {
+
+      const initContract = () => {
+        if(contract === null) {
+          dispatch(initContractAsync())
+        }
+      }
+
       if (address) {
           setWalletAddress(`${address.substring(0, 6)}...${address.slice(-4)}`);
           initContract();
@@ -65,7 +68,7 @@ const Navbar = () => {
           setWalletAddress("Connect Wallet")
           setAdmin(false);
       }
-    }, [address, data])
+    }, [address, data, contract, dispatch])
 
     return (
     <Box sx={{ flexGrow: 1 }}>
