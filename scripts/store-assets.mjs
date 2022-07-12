@@ -7,7 +7,7 @@ dotenv.config();
 let data = [];
 
 const API_KEY = process.env.NFT_STORAGE_API_KEY
-const DIR = "./assets/"
+const DIR = "./public/assets/"
 
 let rawdata = fs.readFileSync('./assets.json');
 let assets = JSON.parse(rawdata);

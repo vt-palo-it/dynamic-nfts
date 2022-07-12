@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const CONTRACT_NAME = 'BlocSkillzNFT001';
+const CONTRACT_NAME = 'DynamicNFT002';
 
 async function main() {
     const MyToken = await ethers.getContractFactory(CONTRACT_NAME)

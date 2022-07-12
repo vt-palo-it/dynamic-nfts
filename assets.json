@@ -1,0 +1,14 @@
+[
+    {
+        "image": "level1.jpg",
+        "name": "Level 1 Mage",
+        "description": "**Level 1** \n\nMage Level 1",
+        "external_url": "https://www.testasset.com"     
+    },
+    {
+        "image": "level2.jpg",
+        "name": "Level 2 Mage",
+        "description": "**Level 2** \n\nMage Level 2",
+        "external_url": "https://www.testasset.com"     
+    }
+]

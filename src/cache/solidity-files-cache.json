@@ -1,10 +1,10 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\my-nft-career\\contracts\\BlocSkillzNFT001.sol": {
-      "lastModificationDate": 1654656321408,
-      "contentHash": "df077002b84ff2c7c916715c9ff16859",
-      "sourceName": "contracts/BlocSkillzNFT001.sol",
+    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\dynamic-nfts\\contracts\\DynamicNFT001.sol": {
+      "lastModificationDate": 1657623933303,
+      "contentHash": "086b689fc89a48ecbdba5c44b63c6d1e",
+      "sourceName": "contracts/DynamicNFT001.sol",
       "solcConfig": {
         "version": "0.8.6",
         "settings": {
@@ -30,20 +30,20 @@
       },
       "imports": [
         "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
         "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
         "@openzeppelin/contracts/access/Ownable.sol",
-        "@openzeppelin/contracts/utils/Counters.sol",
-        "./standards/ERC2981PerToken.sol"
+        "@openzeppelin/contracts/utils/Counters.sol"
       ],
       "versionPragmas": [
         "^0.8.4"
       ],
       "artifacts": [
-        "BlocSkillzNFT001"
+        "DynamicNFT002"
       ]
     },
-    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\my-nft-career\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\ERC721.sol": {
-      "lastModificationDate": 1654649199942,
+    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\dynamic-nfts\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\ERC721.sol": {
+      "lastModificationDate": 1657616308544,
       "contentHash": "21b9f3bdb3e60f56ea81361c37420136",
       "sourceName": "@openzeppelin/contracts/token/ERC721/ERC721.sol",
       "solcConfig": {
@@ -85,8 +85,46 @@
         "ERC721"
       ]
     },
-    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\my-nft-career\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\extensions\\ERC721URIStorage.sol": {
-      "lastModificationDate": 1654649199957,
+    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\dynamic-nfts\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\extensions\\ERC721Enumerable.sol": {
+      "lastModificationDate": 1657616309871,
+      "contentHash": "88095889e59d16821879a8083f906503",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
+      "solcConfig": {
+        "version": "0.8.6",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../ERC721.sol",
+        "./IERC721Enumerable.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.0"
+      ],
+      "artifacts": [
+        "ERC721Enumerable"
+      ]
+    },
+    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\dynamic-nfts\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\extensions\\ERC721URIStorage.sol": {
+      "lastModificationDate": 1657616314200,
       "contentHash": "580a443491d9d70eb064b0130fc3cd01",
       "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
       "solcConfig": {
@@ -122,8 +160,8 @@
         "ERC721URIStorage"
       ]
     },
-    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\my-nft-career\\node_modules\\@openzeppelin\\contracts\\access\\Ownable.sol": {
-      "lastModificationDate": 1654649200155,
+    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\dynamic-nfts\\node_modules\\@openzeppelin\\contracts\\access\\Ownable.sol": {
+      "lastModificationDate": 1657616334005,
       "contentHash": "8398972af73b4e9e5ff3b31cad86234f",
       "sourceName": "@openzeppelin/contracts/access/Ownable.sol",
       "solcConfig": {
@@ -159,8 +197,8 @@
         "Ownable"
       ]
     },
-    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\my-nft-career\\node_modules\\@openzeppelin\\contracts\\utils\\Counters.sol": {
-      "lastModificationDate": 1654649199821,
+    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\dynamic-nfts\\node_modules\\@openzeppelin\\contracts\\utils\\Counters.sol": {
+      "lastModificationDate": 1657616284506,
       "contentHash": "74654e3ae5d7f39555055dfe244dab7a",
       "sourceName": "@openzeppelin/contracts/utils/Counters.sol",
       "solcConfig": {
@@ -194,46 +232,8 @@
         "Counters"
       ]
     },
-    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\my-nft-career\\contracts\\standards\\ERC2981PerToken.sol": {
-      "lastModificationDate": 1654649157402,
-      "contentHash": "12f447ca482384c365c9836832a755c4",
-      "sourceName": "contracts/standards/ERC2981PerToken.sol",
-      "solcConfig": {
-        "version": "0.8.6",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/utils/introspection/ERC165.sol",
-        "./ERC2981.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ERC2981PerTokenRoyalties"
-      ]
-    },
-    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\my-nft-career\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\IERC721.sol": {
-      "lastModificationDate": 1654649200076,
+    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\dynamic-nfts\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\IERC721.sol": {
+      "lastModificationDate": 1657616326565,
       "contentHash": "cd8e72e5859bddd5fd26b2fb5c51c846",
       "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721.sol",
       "solcConfig": {
@@ -269,8 +269,8 @@
         "IERC721"
       ]
     },
-    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\my-nft-career\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\IERC721Receiver.sol": {
-      "lastModificationDate": 1654649200086,
+    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\dynamic-nfts\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\IERC721Receiver.sol": {
+      "lastModificationDate": 1657616327584,
       "contentHash": "c22d4395e33763de693fd440c6fd10e1",
       "sourceName": "@openzeppelin/contracts/token/ERC721/IERC721Receiver.sol",
       "solcConfig": {
@@ -304,8 +304,8 @@
         "IERC721Receiver"
       ]
     },
-    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\my-nft-career\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\extensions\\IERC721Metadata.sol": {
-      "lastModificationDate": 1654649200082,
+    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\dynamic-nfts\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\extensions\\IERC721Metadata.sol": {
+      "lastModificationDate": 1657616327182,
       "contentHash": "efbc0d15b80a74e34dbe8da0f3e879bb",
       "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/IERC721Metadata.sol",
       "solcConfig": {
@@ -341,8 +341,8 @@
         "IERC721Metadata"
       ]
     },
-    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\my-nft-career\\node_modules\\@openzeppelin\\contracts\\utils\\Address.sol": {
-      "lastModificationDate": 1654649199799,
+    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\dynamic-nfts\\node_modules\\@openzeppelin\\contracts\\utils\\Address.sol": {
+      "lastModificationDate": 1657616279287,
       "contentHash": "ad714a6368ee7d43cded6bbe8af0b155",
       "sourceName": "@openzeppelin/contracts/utils/Address.sol",
       "solcConfig": {
@@ -376,8 +376,8 @@
         "Address"
       ]
     },
-    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\my-nft-career\\node_modules\\@openzeppelin\\contracts\\utils\\Context.sol": {
-      "lastModificationDate": 1654649199819,
+    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\dynamic-nfts\\node_modules\\@openzeppelin\\contracts\\utils\\Context.sol": {
+      "lastModificationDate": 1657616283369,
       "contentHash": "5f2c5c4b6af2dd4551027144797bc8be",
       "sourceName": "@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
@@ -411,8 +411,8 @@
         "Context"
       ]
     },
-    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\my-nft-career\\node_modules\\@openzeppelin\\contracts\\utils\\Strings.sol": {
-      "lastModificationDate": 1654649200187,
+    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\dynamic-nfts\\node_modules\\@openzeppelin\\contracts\\utils\\Strings.sol": {
+      "lastModificationDate": 1657616337020,
       "contentHash": "9c54c6c065d9e590fdcdd72c451425b9",
       "sourceName": "@openzeppelin/contracts/utils/Strings.sol",
       "solcConfig": {
@@ -446,8 +446,8 @@
         "Strings"
       ]
     },
-    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\my-nft-career\\node_modules\\@openzeppelin\\contracts\\utils\\introspection\\ERC165.sol": {
-      "lastModificationDate": 1654649199892,
+    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\dynamic-nfts\\node_modules\\@openzeppelin\\contracts\\utils\\introspection\\ERC165.sol": {
+      "lastModificationDate": 1657616300977,
       "contentHash": "0e7db055ce108f9da7bb6686a00287c0",
       "sourceName": "@openzeppelin/contracts/utils/introspection/ERC165.sol",
       "solcConfig": {
@@ -483,8 +483,8 @@
         "ERC165"
       ]
     },
-    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\my-nft-career\\node_modules\\@openzeppelin\\contracts\\utils\\introspection\\IERC165.sol": {
-      "lastModificationDate": 1654649200039,
+    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\dynamic-nfts\\node_modules\\@openzeppelin\\contracts\\utils\\introspection\\IERC165.sol": {
+      "lastModificationDate": 1657616323847,
       "contentHash": "03e6768535ac4da0e9756f1d8a4a018a",
       "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
       "solcConfig": {
@@ -518,10 +518,10 @@
         "IERC165"
       ]
     },
-    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\my-nft-career\\contracts\\standards\\ERC2981.sol": {
-      "lastModificationDate": 1654649157400,
-      "contentHash": "ce170bc06d49289cb7e0283d78189760",
-      "sourceName": "contracts/standards/ERC2981.sol",
+    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\dynamic-nfts\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\extensions\\IERC721Enumerable.sol": {
+      "lastModificationDate": 1657616326903,
+      "contentHash": "f4dd06783f321aa26179bc2b6e361c29",
+      "sourceName": "@openzeppelin/contracts/token/ERC721/extensions/IERC721Enumerable.sol",
       "solcConfig": {
         "version": "0.8.6",
         "settings": {
@@ -546,277 +546,13 @@
         }
       },
       "imports": [
-        "@openzeppelin/contracts/utils/introspection/ERC165.sol",
-        "./IERC2981.sol"
+        "../IERC721.sol"
       ],
       "versionPragmas": [
         "^0.8.0"
       ],
       "artifacts": [
-        "ERC2981Base"
-      ]
-    },
-    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\my-nft-career\\contracts\\standards\\IERC2981.sol": {
-      "lastModificationDate": 1654649157402,
-      "contentHash": "3654f25a1525f3b57cab628455c1d60d",
-      "sourceName": "contracts/standards/IERC2981.sol",
-      "solcConfig": {
-        "version": "0.8.6",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC2981Royalties"
-      ]
-    },
-    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\my-nft-career\\node_modules\\@openzeppelin\\contracts\\access\\AccessControl.sol": {
-      "lastModificationDate": 1654649199784,
-      "contentHash": "08101487003fda67e21e6d2cfe35bb2e",
-      "sourceName": "@openzeppelin/contracts/access/AccessControl.sol",
-      "solcConfig": {
-        "version": "0.8.6",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./IAccessControl.sol",
-        "../utils/Context.sol",
-        "../utils/Strings.sol",
-        "../utils/introspection/ERC165.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "AccessControl"
-      ]
-    },
-    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\my-nft-career\\node_modules\\@openzeppelin\\contracts\\access\\IAccessControl.sol": {
-      "lastModificationDate": 1654649199994,
-      "contentHash": "57c84298234411cea19c7c284d86be8b",
-      "sourceName": "@openzeppelin/contracts/access/IAccessControl.sol",
-      "solcConfig": {
-        "version": "0.8.6",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IAccessControl"
-      ]
-    },
-    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\my-nft-career\\node_modules\\@openzeppelin\\contracts\\token\\ERC1155\\ERC1155.sol": {
-      "lastModificationDate": 1654649199865,
-      "contentHash": "792473360274d02eed0fe4c691d67d16",
-      "sourceName": "@openzeppelin/contracts/token/ERC1155/ERC1155.sol",
-      "solcConfig": {
-        "version": "0.8.6",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "./IERC1155.sol",
-        "./IERC1155Receiver.sol",
-        "./extensions/IERC1155MetadataURI.sol",
-        "../../utils/Address.sol",
-        "../../utils/Context.sol",
-        "../../utils/introspection/ERC165.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "ERC1155"
-      ]
-    },
-    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\my-nft-career\\node_modules\\@openzeppelin\\contracts\\token\\ERC1155\\IERC1155.sol": {
-      "lastModificationDate": 1654649200020,
-      "contentHash": "59e1bc5713fdebc7f821dc52f4d3e0ef",
-      "sourceName": "@openzeppelin/contracts/token/ERC1155/IERC1155.sol",
-      "solcConfig": {
-        "version": "0.8.6",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../../utils/introspection/IERC165.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC1155"
-      ]
-    },
-    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\my-nft-career\\node_modules\\@openzeppelin\\contracts\\token\\ERC1155\\IERC1155Receiver.sol": {
-      "lastModificationDate": 1654649200028,
-      "contentHash": "9f8822b72fe2702979e40160cb6d9636",
-      "sourceName": "@openzeppelin/contracts/token/ERC1155/IERC1155Receiver.sol",
-      "solcConfig": {
-        "version": "0.8.6",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../../utils/introspection/IERC165.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC1155Receiver"
-      ]
-    },
-    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\my-nft-career\\node_modules\\@openzeppelin\\contracts\\token\\ERC1155\\extensions\\IERC1155MetadataURI.sol": {
-      "lastModificationDate": 1654649200025,
-      "contentHash": "9148c2e10c4efb12c71a7f080da5559b",
-      "sourceName": "@openzeppelin/contracts/token/ERC1155/extensions/IERC1155MetadataURI.sol",
-      "solcConfig": {
-        "version": "0.8.6",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "../IERC1155.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.0"
-      ],
-      "artifacts": [
-        "IERC1155MetadataURI"
+        "IERC721Enumerable"
       ]
     }
   }
