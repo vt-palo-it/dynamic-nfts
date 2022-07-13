@@ -9,7 +9,7 @@ let data = [];
 const API_KEY = process.env.NFT_STORAGE_API_KEY
 const DIR = "./public/assets/"
 
-let rawdata = fs.readFileSync('./assets.json');
+let rawdata = fs.readFileSync('./JSON/assets.json');
 let assets = JSON.parse(rawdata);
 
 async function storeAsset() {
