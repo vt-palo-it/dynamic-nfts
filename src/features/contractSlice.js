@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { ethers } from "ethers"
 import { ThirdwebSDK } from "@thirdweb-dev/sdk";
-import contractABI from '../artifacts/contracts/BlocSkillzNFT001.sol/BlocSkillzNFT001.json'
+import contractABI from '../artifacts/contracts/DynamicNFT003.sol/DynamicNFT002.json'
 
 
 const initialState= {
@@ -22,8 +22,9 @@ export const initContractAsync = createAsyncThunk(
 
 		console.log('signer', provider.getSigner())
 
-		const contract = await sdk.getContractFromAbi(process.env.REACT_APP_CONTRACT_ADDRESS, contractABI.abi);
-
+		// const contract = await sdk.getContractFromAbi(process.env.REACT_APP_CONTRACT_ADDRESS, contractABI.abi);
+    const contract = await sdk.getContractFromAbi("0xE82EF42877F6f02EAf9072F4553F73b6B7326909", contractABI.abi);
+    
 		console.log('contract', contract);
     return contract;
   }

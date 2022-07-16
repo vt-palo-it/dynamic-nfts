@@ -20,8 +20,8 @@ const Landing = () => {
     return (
         <Box p={2} width="full" alignItems="center">
             <Paper elevation={3}>
-                <Stack direction='column' spacing={5} padding={35}>
-                    <img src="./assets/BlocSkillz.png" alt="Logo" width="100%"/>
+                <Stack direction='column' spacing={5} padding={20}>
+                    <img src="./assets/MainImage.png" alt="Logo" width="100%"/>
                     <TextField name="wallet" value={data} label="Wallet Address" variant="outlined" onChange={e => setData(e.target.value)} />
                     <Button variant="contained" onClick={routeChange}>Search</Button>
                 </Stack>

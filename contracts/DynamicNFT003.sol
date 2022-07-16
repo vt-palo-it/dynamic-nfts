@@ -20,20 +20,22 @@ contract DynamicNFT002 is ERC721Enumerable, Ownable {
   }
   // mapping  get filled with boxes erverytime someone claims a box
   mapping (uint256 => Toon) public toons;
-  constructor() ERC721("DynamicNFT002", "DNFT") {}
-    
+  constructor() ERC721("BoxUnBoxNFT", "BUBN") {}
+
 
   // mint function which sets the nft in state sealed
   function mintNFT(string[] memory _levelURI) public onlyOwner {
 
     uint256 supply = totalSupply();
-    // set state sealed of this box
+    // Set state to level 1
     Toon memory newToon = Toon(1);
     levelUri = _levelURI;
-    // we take the boxes mapping and add supply + 1 to add it to the next mapping
+    // Add +1 to the supply of NFTs
     toons[supply + 1] = newToon;
     _safeMint(msg.sender, supply + 1);
   }
+
+
 
   // this is for changing the Asset
   function tokenURI(uint256 _tokenId) public view virtual override returns (string memory uri) {
@@ -55,7 +57,7 @@ contract DynamicNFT002 is ERC721Enumerable, Ownable {
   }
   // unbox function to change the nft to unboxed
   function changeNFT(uint256 _tokenId, uint256 _level) public {
-    require(msg.sender == ownerOf(_tokenId), "You are not the owner of this NFT.");
+    //require(msg.sender == ownerOf(_tokenId), "You are not the owner of this NFT.");
 
     // dont allow higher level than array index
     Toon storage currentToon = toons[_tokenId];

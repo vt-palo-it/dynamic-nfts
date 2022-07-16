@@ -78,7 +78,6 @@ const Navbar = () => {
             <img src="/assets/BlocSkillz.png" alt="Logo"/>
           </Link>
         <Typography component="div" sx={{ flexGrow: 1 }} />
-        <Button sx={{ mr: 2 }} variant="contained">Request Account</Button>
         { admin ? <Button onClick={()=>navigate("/admin")} sx={{ mr: 2 }} variant="contained">Dashboard</Button> : '' }
         <Button variant="contained" onClick={connectWithMetamask}>{walletAddress}</Button>
         </Toolbar>

@@ -1,6 +1,47 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
+    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\dynamic-nfts\\contracts\\DynamicNFT003.sol": {
+      "lastModificationDate": 1657891559007,
+      "contentHash": "bf5b34b3fa911eff9b74021b57572fc3",
+      "sourceName": "contracts/DynamicNFT003.sol",
+      "solcConfig": {
+        "version": "0.8.6",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
+        "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
+        "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
+        "@openzeppelin/contracts/access/Ownable.sol",
+        "@openzeppelin/contracts/utils/Counters.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.4"
+      ],
+      "artifacts": [
+        "DynamicNFT002"
+      ]
+    },
     "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\dynamic-nfts\\node_modules\\@openzeppelin\\contracts\\token\\ERC721\\ERC721.sol": {
       "lastModificationDate": 1657616308544,
       "contentHash": "21b9f3bdb3e60f56ea81361c37420136",
@@ -512,47 +553,6 @@
       ],
       "artifacts": [
         "IERC721Enumerable"
-      ]
-    },
-    "C:\\Users\\vtroh.DDEV\\Desktop\\Code\\dynamic-nfts\\contracts\\DynamicNFT003.sol": {
-      "lastModificationDate": 1657667953037,
-      "contentHash": "c0772d18ac51d6296b8347218ec6bb2b",
-      "sourceName": "contracts/DynamicNFT003.sol",
-      "solcConfig": {
-        "version": "0.8.6",
-        "settings": {
-          "optimizer": {
-            "enabled": false,
-            "runs": 200
-          },
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [
-        "@openzeppelin/contracts/token/ERC721/ERC721.sol",
-        "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol",
-        "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol",
-        "@openzeppelin/contracts/access/Ownable.sol",
-        "@openzeppelin/contracts/utils/Counters.sol"
-      ],
-      "versionPragmas": [
-        "^0.8.4"
-      ],
-      "artifacts": [
-        "DynamicNFT002"
       ]
     }
   }

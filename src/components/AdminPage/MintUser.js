@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 
-
+import { useAddress, useMetamask } from "@thirdweb-dev/react";
 import { NFTStorage, File } from 'nft.storage';
 
 import { ProfileDetails, ProfileInnerDetail } from "./AdminProfile";
@@ -19,18 +19,11 @@ import {
 } from '../../features/contractSlice';
 
 const MintUserWrapper = styled.div`
-  width: 80%;
+  width: 85%;
   justify-content: space-around;
-  padding: 2rem;
-  display: grid;
-  grid-template-columns: 1fr 4fr 4fr 1fr;
-  gap: 2rem;
+  padding-left: 5rem;
 `;
 
-const CertDetails = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 
 const CertPreview = styled.div`
   display: flex;
@@ -41,127 +34,89 @@ const H2Title = styled.h2`
   font-weight: 500;
 `;
 
-export default function MintUser({ userToMint }) {
-  const [badges, setBadges] = useState(undefined);
-  const [mintBadge, setMintBadge] = useState(undefined);
-  const [userTitle, setUserTitle] = useState(undefined);
-  const [userDescription, setUserDescription] = useState(undefined);
+export default function MintUser() {
   const [loading, setLoading] = useState(false);
   const [mintedTransaction, setMintedTransaction] = useState(false);
   const contract = useSelector(getContract);
-  
+  const address = useAddress();
+  const [value1, setValue1] = useState('');
+  const [value2, setValue2] = useState('');
 
-  const getData = () => {
-    fetch("badges.json", {
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((myJson) => {
-        setBadges(myJson);
-      });
-  };
+  // const getData = () => {
+  //   fetch("assets.json", {
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accept: "application/json",
+  //     },
+  //   })
+  //   .then((response) => {
+  //     return response.json();
+  //   })
+  //   .then((myJson) => {
+  //     setBadges(myJson);
+  //   });
+  // };
 
-  const uploadMetaData = async () => {
-    setLoading(true)
-    setMintedTransaction(false)
-    const nftStorageAPIKey = process.env.REACT_APP_NFT_STORAGE_API_KEY;
-    const badge = mintBadge.replace(/\s/g, '').toLowerCase().concat('.png')
-    const image = `/assets/${badge}`
-    const imageData = await fetch(image);
-    const imageBlob = await imageData.blob();
+  // const uploadMetaData = async () => {
+  //   setLoading(true)
+  //   setMintedTransaction(false)
+  //   const nftStorageAPIKey = process.env.REACT_APP_NFT_STORAGE_API_KEY;
+  //   const badge = mintBadge.replace(/\s/g, '').toLowerCase().concat('.png')
+  //   const image = `/assets/${badge}`
+  //   const imageData = await fetch(image);
+  //   const imageBlob = await imageData.blob();
 
-    const client = new NFTStorage({ token: nftStorageAPIKey });
+  //   const client = new NFTStorage({ token: nftStorageAPIKey });
 
-    const nft = {
-      image: new File(
-        [imageBlob],
-        badge,
-        { type: 'image/png' }
-      ),
-      name: userTitle,
-      description: userDescription,
-      attributes: [{  "trait_type": "Type", "value": badge.split("0")[0] }]
-    }
+  //   const nft = {
+  //     image: new File(
+  //       [imageBlob],
+  //       badge,
+  //       { type: 'image/png' }
+  //     ),
+  //     name: userTitle,
+  //     description: userDescription,
+  //     attributes: [{  "trait_type": "Type", "value": badge.split("0")[0] }]
+  //   }
 
-    const metadata = await client.store(nft);
-    console.log(metadata);
+  //   const metadata = await client.store(nft);
+  //   console.log(metadata);
 
-    return metadata.url;
-  }
-
-  useEffect(() => {
-    getData();
-  }, []);
+  //   return metadata.url;
+  // }
 
   async function mintNFT() {
-    const metadata = await uploadMetaData();
-    const mintToWallet = userToMint?.wallet;
-    console.log('start minting');
-    const result = await contract.call("safeMint", mintToWallet, metadata);
-    console.log(result);
-    setLoading(false);
-    console.log(result.receipt.transactionHash);
-    setMintedTransaction(result.receipt.transactionHash);
-    console.log(mintedTransaction);
+    setLoading(true)
+    setMintedTransaction(false)
+    if (value1 != "" && value2 != ""){
+      let metadata = [value1, value2]
+      console.log('start minting to:', address);
+      console.log(metadata)
+      // const result = await contract.call("mintNFT", address, metadata);
+      const result = await contract.call("mintNFT", metadata);
+      console.log(result);
+      setLoading(false);
+      console.log(result.receipt.transactionHash);
+      setMintedTransaction(result.receipt.transactionHash);
+    }
   }
 
   return (
     <MintUserWrapper>
       <div></div>
-      <CertDetails>
-        <H2Title>Certification details</H2Title>
-        <h4>{userToMint.name}</h4>
-        <ProfileDetails>
-          <ProfileInnerDetail>
-            <p>Role:</p>
-            <p>{userToMint?.role}</p>
-          </ProfileInnerDetail>
-          <ProfileInnerDetail>
-            <p>User Wallet:</p>
-            <p>{userToMint?.wallet.substring(0,6)}...{userToMint?.wallet.slice(-4)}</p>
-          </ProfileInnerDetail>
-          <Autocomplete
-            style={{ width: "100%", paddingTop: "1rem" }}
-            disablePortal
-            onChange={(event, newValue) => {
-              setMintBadge(newValue);
-            }}
-            id="combo-box-demo"
-            options={badges?.badgesList.map((option) => option)}
-            sx={{ width: 300 }}
-            renderInput={(params) => <TextField {...params} label="Badges" />}
-          />
-          <TextField
-            style={{ width: "100%", marginTop: "3rem" }}
-            onChange={(e) => setUserTitle(e.target.value)}
-            id="outlined-basic"
-            label="Title"
-            variant="outlined"
-          />
-          <TextField
-            placeholder="Description"
-            style={{ width: "100%", marginTop: "3rem" }}
-            onChange={(e) => setUserDescription(e.target.value)}
-            multiline
-            rows={10}
-          />
-        </ProfileDetails>
-      </CertDetails>
       <CertPreview>
-        <h3>Preview</h3>
-        <PreviewBadge
-          userToMintName={userToMint.name}
-          mintBadge={mintBadge}
-          userTitle={userTitle}
-          userDescription={userDescription}
+        <H2Title>Dynamic NFTs</H2Title>
+        <TextField sx={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}
+          label="IPFS of Box"
+          onChange={e => setValue1(e.target.value)}
         />
-        {!loading && (
-            <Button style={{backgroundColor:"#5463b8",margin:"2rem"}} variant="contained" onClick={mintNFT}>Certify</Button>
+        <TextField sx={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}
+          label="IPFS of UnBox"
+          onChange={e => setValue2(e.target.value)}
+        />
+
+        {!loading && !mintedTransaction && (
+            <Button style={{backgroundColor:"#5463b8"}} variant="contained" onClick={mintNFT}>Mint</Button>
         )}
 
         {loading && (
@@ -175,7 +130,7 @@ export default function MintUser({ userToMint }) {
           </Button>
         )}
       </CertPreview>
-      <div></div>
+
     </MintUserWrapper>
   );
 }

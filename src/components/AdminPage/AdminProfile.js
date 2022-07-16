@@ -93,9 +93,9 @@ export default function AdminProfile() {
         </ProfileDetails>
         <div></div>
 
-      </AdminProfileInner>
-      </Stack>
-            </Paper>
-        </Box>     
+          </AdminProfileInner>
+        </Stack>
+      </Paper>
+    </Box>     
   );
 }
