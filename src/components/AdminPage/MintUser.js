@@ -1,18 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useSelector } from 'react-redux';
 
 import styled from "styled-components";
-import Autocomplete from "@mui/material/Autocomplete";
+// import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import Box from '@mui/material/Box';
 import CircularProgress from '@mui/material/CircularProgress';
 
-import { useAddress, useMetamask } from "@thirdweb-dev/react";
-import { NFTStorage, File } from 'nft.storage';
+import { useAddress } from "@thirdweb-dev/react";
+// import { NFTStorage, File } from 'nft.storage';
 
-import { ProfileDetails, ProfileInnerDetail } from "./AdminProfile";
-import PreviewBadge from "./PreviewBadge";
+// import { ProfileDetails, ProfileInnerDetail } from "./AdminProfile";
+// import PreviewBadge from "./PreviewBadge";
 
 import {
   getContract,
@@ -41,6 +41,7 @@ export default function MintUser() {
   const address = useAddress();
   const [value1, setValue1] = useState('');
   const [value2, setValue2] = useState('');
+  const [value3, setValue3] = useState('');
 
   // const getData = () => {
   //   fetch("assets.json", {
@@ -88,16 +89,15 @@ export default function MintUser() {
   async function mintNFT() {
     setLoading(true)
     setMintedTransaction(false)
-    if (value1 != "" && value2 != ""){
-      let metadata = [value1, value2]
+    if (value1 !== "" && value2 !== "" && value3 !== ""){
+      let metadata = [value1, value2, value3]
       console.log('start minting to:', address);
-      console.log(metadata)
       // const result = await contract.call("mintNFT", address, metadata);
       const result = await contract.call("mintNFT", metadata);
-      console.log(result);
-      setLoading(false);
-      console.log(result.receipt.transactionHash);
+      console.log("Reciept: ",result.receipt.transactionHash);
       setMintedTransaction(result.receipt.transactionHash);
+      window.alert("Minting Complete!");
+      setLoading(false);
     }
   }
 
@@ -108,15 +108,22 @@ export default function MintUser() {
         <H2Title>Dynamic NFTs</H2Title>
         <TextField sx={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}
           label="IPFS of Box"
+          // label="IPFS Level 1"
           onChange={e => setValue1(e.target.value)}
         />
         <TextField sx={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}
           label="IPFS of UnBox"
+          // label="IPFS Level 2"
           onChange={e => setValue2(e.target.value)}
         />
+        <TextField sx={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}
+          label="IPFS of Skull"
+          // label="IPFS Level 3"
+          onChange={e => setValue3(e.target.value)}
+        />
 
-        {!loading && !mintedTransaction && (
-            <Button style={{backgroundColor:"#5463b8"}} variant="contained" onClick={mintNFT}>Mint</Button>
+        {!loading && (
+            <Button style={{backgroundColor:"#5463b8", marginBottom: "1rem"}} variant="contained" onClick={mintNFT}>Mint</Button>
         )}
 
         {loading && (
@@ -125,7 +132,7 @@ export default function MintUser() {
           </Box>
         )}
         {mintedTransaction && (
-          <Button style={{backgroundColor:"#5463b8", margin:"0rem 2rem 1rem ", textAlign: "center"}} variant="contained" href={`https://rinkeby.etherscan.io/tx/${mintedTransaction}`} target="_blank">
+          <Button style={{backgroundColor:"#5463b8", textAlign: "center"}} variant="contained" href={`https://rinkeby.etherscan.io/tx/${mintedTransaction}`} target="_blank">
             See on Etherscan
           </Button>
         )}

@@ -1,7 +1,6 @@
 import React from 'react'
 
 import AdminProfile from './AdminProfile'
-import SearchProfile from './SearchProfile'
 import MintUser from './MintUser'
 
 import Box from '@mui/material/Box';
@@ -14,7 +13,6 @@ export default function AdminPage() {
       <Paper elevation={3}>
         <Stack direction='column' spacing={1} paddingLeft={5} paddingRight={5} paddingBottom={5}>
           <AdminProfile/>
-          {/* <SearchProfile/> */}
           <MintUser/>
         </Stack>
       </Paper>
