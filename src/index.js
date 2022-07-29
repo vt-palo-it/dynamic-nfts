@@ -1,3 +1,4 @@
+import './polyfill.js';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
@@ -14,7 +15,7 @@ const chainAPI = process.env.REACT_APP_ALCHEMY_KEY;
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-	<React.StrictMode>
+	// <React.StrictMode>
 		<Provider store={store}>
 			<ThirdwebProvider
 					desiredChainId = {ChainId.Rinkeby}
@@ -22,5 +23,5 @@ root.render(
 				<App />
 			</ThirdwebProvider>
 		</Provider>
-	</React.StrictMode>
+	// </React.StrictMode> 
 );

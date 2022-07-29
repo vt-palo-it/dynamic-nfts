@@ -9,7 +9,7 @@ import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract DynamicNFT002 is ERC721Enumerable, Ownable {
 
-  constructor() ERC721("LeviathansNFT", "LEV") {}
+  constructor() ERC721("BoxingNFT", "BoxN") {}
 
   // Array of Uris for the new assets metadata
   string[] levelUri;
@@ -21,7 +21,7 @@ contract DynamicNFT002 is ERC721Enumerable, Ownable {
   mapping (uint256 => Item) public items;
 
   // mint function which sets the nft in initial state
-  function mintNFT(string[] memory _levelURI) public onlyOwner {
+  function mintNFT(string[] memory _levelURI) public {
     uint256 supply = totalSupply();
 
     // Set state to level 1

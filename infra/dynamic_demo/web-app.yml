@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dyn-nft
+  namespace: dynamic
+  labels:
+    name: dyn-nft
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: dyn-nft
+  template:
+    metadata:
+      labels:
+        app: dyn-nft
+    spec:
+      containers:
+        - name: dyn-nft-container
+          image: "blocktrustjuliensdevregistry.azurecr.io/dyn-nft:latest"
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          env:
+          - name: REACT_APP_ALCHEMY_KEY
+            value: "https://eth-rinkeby.alchemyapi.io/v2/Pit0BpwoG84PQUywaTKWqu0exdmrtp_F"
+          - name: GENERATE_SOURCEMAP
+            value: "false"
+          - name: PRIVATE_KEY
+            value: "63f074db886e3b489fcf093d1e3c1ef0d737daebd8ed160ec8d9c0e68a17f0e8"
+          - name: NETWORK_API_URL
+            value: "https://eth-rinkeby.alchemyapi.io/v2/mWKFw4Mr3cHhkez7o04MNxPptbyhdUay"
+          - name: ETHERSCAN_API_KEY
+            value: "A1975QEPEDP7RSBSG9J46CGACUZ3CC2262"
+      imagePullSecrets:
+        - name: web-image-pull-secret-name
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: dyn-nft
+  namespace: dynamic
+spec:
+  selector:
+    app: dyn-nft
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+
+---
+
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dyn-nft
+  namespace: dynamic
+  annotations:
+    kubernetes.io/ingress.class: azure/application-gateway
+    appgw.ingress.kubernetes.io/backend-path-prefix: /
+    nginx.ingress.kubernetes.io/rewrite-target: /$1
+spec:
+  rules:
+  - host: dynamic.90fe87278689478db76e.australiaeast.aksapp.io
+    http:
+      paths:
+        - path: /
+          backend:
+            service:
+              name: dyn-nft
+              port:
+                number: 80
+          pathType: Prefix

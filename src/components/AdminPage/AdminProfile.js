@@ -84,7 +84,8 @@ export default function AdminProfile() {
           </ProfileInnerDetail>
           <ProfileInnerDetail>
           <Title>User Wallet:</Title>
-            <p>{adminProfile?.wallet.substring(0, 6)}...{adminProfile?.wallet.slice(-4)}</p>
+           <p>Wallet Address</p>
+            {/* <p>{adminProfile?.wallet.substring(0, 6)}...{adminProfile?.wallet.slice(-4)}</p> */}
           </ProfileInnerDetail>
           <ProfileInnerDetail>
           <Title>Organisation:</Title>

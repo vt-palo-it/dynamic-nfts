@@ -17,14 +17,16 @@ export const initContractAsync = createAsyncThunk(
 		await window.ethereum.request({ method: 'eth_requestAccounts' });
 		const provider = new ethers.providers.Web3Provider(window.ethereum);
 		const signer = provider.getSigner();
-		const sdk = new ThirdwebSDK('rinkeby');
+		// const sdk = new ThirdwebSDK('rinkeby');
+    const sdk = new ThirdwebSDK(provider);
 		sdk.updateSignerOrProvider(signer);
 
 		console.log('signer', provider.getSigner())
 
 		// const contract = await sdk.getContractFromAbi(process.env.REACT_APP_CONTRACT_ADDRESS, contractABI.abi);
-    const contract = await sdk.getContractFromAbi("0x4ed7aAf8bD9c5bDC713B72329Cc7E249996453E4", contractABI.abi);   // Boxes
-    // const contract = await sdk.getContractFromAbi("0x4ed7aAf8bD9c5bDC713B72329Cc7E249996453E4", contractABI.abi);   // Leviathans
+    // const contract = await sdk.getContractFromAbi("0x4ed7aAf8bD9c5bDC713B72329Cc7E249996453E4", contractABI.abi);   // Boxes
+    const contract = await sdk.getContractFromAbi("0x6fbC28Db927116E54a51f39b78e098023529Fb02", contractABI.abi);   // Boxes
+    // const contract = await sdk.getContractFromAbi("0xfcEE8c419DC169201104d31CB987d55BA0333e8f", contractABI.abi);   // Leviathans
 
 		console.log('contract', contract);
     return contract;
